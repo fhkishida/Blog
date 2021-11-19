@@ -23,13 +23,6 @@ class Post
         $this->body = $body;
         $this->slug = $slug;
     }
-
-    
-    public static function find($slug){
-
-        return static::all()->firstWhere('slug', $slug);
-    }
-
     public static function all(){
 
         // cache'll be remembered forever, til some operation brake it... we need to set a cache()->forget('posts.all') when new post is posted
@@ -46,6 +39,22 @@ class Post
             ->sortByDesc("date");
         });
     }
+    
+    public static function find($slug){
+        
+        return static::all()->firstWhere('slug', $slug);
+    }
+    public static function findOrFail($slug){
+
+        $post = static::find($slug);
+    
+        if(! $post){
+            throw new ModelNotFoundException();
+        }
+        
+        return $post;
+    }
+    
 }
 
 ?>

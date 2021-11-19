@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app.css">
-    <title>Blog</title>
-</head>
-
-<body>
-    <?php foreach($posts as $post){ ?>
+<x-layout>
+    @foreach ($posts as $post)
         <article>
-            <a href="/posts/{{$post->slug}}"><h1><?= $post->title; ?> </h1></a>
-            <p><?= $post->excerpt; ?> </p>
+            <a href="/posts/{{$post->slug}}">
+                <h1> {{ $post->title}} </h1>
+            </a>
+            <p>{{$post->excerpt}} </p>
         </article>
-    <?php   } ?>
-</body>
-</html>
+    @endforeach
+</x-layout>
